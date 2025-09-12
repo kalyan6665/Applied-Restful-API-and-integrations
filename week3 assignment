@@ -1,0 +1,57 @@
+[
+  {
+    "_id": 1,
+    "name": "Virat Kohli",
+    "role": "Batsman",
+    "battingStyle": "Right-hand bat",
+    "bowlingStyle": null,
+    "matches": 274,
+    "runs": 12898,
+    "wickets": 4,
+    "team": "India"
+  },
+  {
+    "_id": 2,
+    "name": "Rohit Sharma",
+    "role": "Batsman",
+    "battingStyle": "Right-hand bat",
+    "bowlingStyle": "Right-arm offbreak",
+    "matches": 244,
+    "runs": 10709,
+    "wickets": 8,
+    "team": "India"
+  },
+  {
+    "_id": 3,
+    "name": "Jasprit Bumrah",
+    "role": "Bowler",
+    "battingStyle": "Right-hand bat",
+    "bowlingStyle": "Right-arm fast",
+    "matches": 89,
+    "runs": 78,
+    "wickets": 149,
+    "team": "India"
+  },
+  {
+    "_id": 4,
+    "name": "Ravindra Jadeja",
+    "role": "All-Rounder",
+    "battingStyle": "Left-hand bat",
+    "bowlingStyle": "Slow left-arm orthodox",
+    "matches": 197,
+    "runs": 2758,
+    "wickets": 220,
+    "team": "India"
+  },
+  {
+    "_id": 5,
+    "name": "MS Dhoni",
+    "role": "Wicketkeeper Batsman",
+    "battingStyle": "Right-hand bat",
+    "bowlingStyle": null,
+    "matches": 350,
+    "runs": 10773,
+    "wickets": 0,
+    "team": "India"
+  }
+]
