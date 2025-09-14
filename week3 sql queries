@@ -1,0 +1,5 @@
+SELECT * FROM f1_team WHERE team = 'Mercedes';
+SELECT name, wins FROM f1_team WHERE wins > 50;
+SELECT name, points FROM f1_team ORDER BY points DESC LIMIT 3;
+SELECT AVG(podiums) AS average_podiums FROM f1_team;
+SELECT name, races FROM f1_team ORDER BY races DESC;
