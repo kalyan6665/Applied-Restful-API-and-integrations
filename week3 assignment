@@ -1,133 +1,62 @@
-/**
- * Cricket Team Database - MongoDB + SQL Example
- * Run with: node cricketTeam.js
- * Make sure MongoDB is running locally or update the connection URI.
- */
-
-const { MongoClient } = require("mongodb");
-
-const uri = "mongodb://127.0.0.1:27017"; // MongoDB connection
-const client = new MongoClient(uri);
-
-async function run() {
-  try {
-    await client.connect();
-    const db = client.db("sports");
-    const players = db.collection("players");
-
-    // Step 1: Insert Players Collection
-    await players.deleteMany({});
-    await players.insertMany([
-      {
-        _id: 1,
-        name: "Virat Kohli",
-        role: "Batsman",
-        battingStyle: "Right-hand bat",
-        bowlingStyle: null,
-        matches: 274,
-        runs: 12898,
-        wickets: 4,
-        team: "India",
-      },
-      {
-        _id: 2,
-        name: "Rohit Sharma",
-        role: "Batsman",
-        battingStyle: "Right-hand bat",
-        bowlingStyle: "Right-arm offbreak",
-        matches: 244,
-        runs: 10709,
-        wickets: 8,
-        team: "India",
-      },
-      {
-        _id: 3,
-        name: "Jasprit Bumrah",
-        role: "Bowler",
-        battingStyle: "Right-hand bat",
-        bowlingStyle: "Right-arm fast",
-        matches: 89,
-        runs: 78,
-        wickets: 149,
-        team: "India",
-      },
-      {
-        _id: 4,
-        name: "Ravindra Jadeja",
-        role: "All-Rounder",
-        battingStyle: "Left-hand bat",
-        bowlingStyle: "Slow left-arm orthodox",
-        matches: 197,
-        runs: 2758,
-        wickets: 220,
-        team: "India",
-      },
-      {
-        _id: 5,
-        name: "MS Dhoni",
-        role: "Wicketkeeper Batsman",
-        battingStyle: "Right-hand bat",
-        bowlingStyle: null,
-        matches: 350,
-        runs: 10773,
-        wickets: 0,
-        team: "India",
-      },
-    ]);
-
-    console.log("✅ Players inserted successfully\n");
-
-    // Step 2: Queries (MongoDB equivalent of SQL)
-
-    // Query 1: Find all batsmen on the team
-    console.log("1️⃣ All Batsmen:");
-    const batsmen = await players.find({ role: "Batsman" }).project({ name: 1, runs: 1, matches: 1 }).toArray();
-    console.log(batsmen);
-
-    // Query 2: Get top 3 players with highest runs
-    console.log("\n2️⃣ Top 3 Players by Runs:");
-    const topRuns = await players.find().sort({ runs: -1 }).limit(3).project({ name: 1, runs: 1 }).toArray();
-    console.log(topRuns);
-
-    // Query 3: Find all-rounders with >1000 runs and >100 wickets
-    console.log("\n3️⃣ All-Rounders (1000+ runs, 100+ wickets):");
-    const allRounders = await players
-      .find({ role: "All-Rounder", runs: { $gt: 1000 }, wickets: { $gt: 100 } })
-      .project({ name: 1, runs: 1, wickets: 1 })
-      .toArray();
-    console.log(allRounders);
-
-    // Query 4: Average runs of batsmen
-    console.log("\n4️⃣ Average Runs of Batsmen:");
-    const avgRuns = await players
-      .aggregate([
-        { $match: { role: "Batsman" } },
-        { $group: { _id: null, avgBatsmanRuns: { $avg: "$runs" } } },
-      ])
-      .toArray();
-    console.log(avgRuns);
-
-    // Query 5: Players with more than 50 wickets
-    console.log("\n5️⃣ Players with >50 Wickets:");
-    const bowlers = await players.find({ wickets: { $gt: 50 } }).sort({ wickets: -1 }).project({ name: 1, wickets: 1 }).toArray();
-    console.log(bowlers);
-
-    // Step 3: SQL Equivalents (just for reference in comments)
-    /**
-     * SQL Equivalent Queries:
-     *
-     * 1. SELECT name, runs, matches FROM players WHERE role = 'Batsman';
-     * 2. SELECT name, runs FROM players ORDER BY runs DESC LIMIT 3;
-     * 3. SELECT name, runs, wickets FROM players WHERE role = 'All-Rounder' AND runs > 1000 AND wickets > 100;
-     * 4. SELECT AVG(runs) AS avg_batsman_runs FROM players WHERE role = 'Batsman';
-     * 5. SELECT name, wickets FROM players WHERE wickets > 50 ORDER BY wickets DESC;
-     */
-  } catch (err) {
-    console.error(err);
-  } finally {
-    await client.close();
+[
+  {
+    "driver_id": 1,
+    "name": "Lewis Hamilton",
+    "role": "Driver",
+    "age": 39,
+    "country": "United Kingdom",
+    "team": "Mercedes",
+    "races": 320,
+    "wins": 103,
+    "podiums": 196,
+    "points": 4500
+  },
+  {
+    "driver_id": 2,
+    "name": "Max Verstappen",
+    "role": "Driver",
+    "age": 27,
+    "country": "Netherlands",
+    "team": "Red Bull Racing",
+    "races": 190,
+    "wins": 70,
+    "podiums": 120,
+    "points": 2500
+  },
+  {
+    "driver_id": 3,
+    "name": "Charles Leclerc",
+    "role": "Driver",
+    "age": 27,
+    "country": "Monaco",
+    "team": "Ferrari",
+    "races": 140,
+    "wins": 9,
+    "podiums": 35,
+    "points": 1200
+  },
+  {
+    "driver_id": 4,
+    "name": "Fernando Alonso",
+    "role": "Driver",
+    "age": 43,
+    "country": "Spain",
+    "team": "Aston Martin",
+    "races": 380,
+    "wins": 32,
+    "podiums": 106,
+    "points": 2300
+  },
+  {
+    "driver_id": 5,
+    "name": "Lando Norris",
+    "role": "Driver",
+    "age": 26,
+    "country": "United Kingdom",
+    "team": "McLaren",
+    "races": 120,
+    "wins": 1,
+    "podiums": 20,
+    "points": 800
   }
-}
-
-run();
-
+]
